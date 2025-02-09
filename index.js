@@ -18,8 +18,8 @@ app.set("views", path.resolve("views"));
 const staticRoute= require("./routes/statics")
 const urlRoute = require("./routes/url")
 const userRoute= require("./routes/owner")
-
-connectToMongoDB(process.env.DB_CONNECT).then(()=>console.log("mongodb connected"));
+const url = process.env.DB_CONNECT;
+connectToMongoDB(url).then(()=>console.log("mongodb connected"));
 
 app.use(express.json());
 
