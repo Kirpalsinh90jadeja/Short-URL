@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-weight: bold;
+            background-color: #f5f5f5;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .main{
+            padding: 15px;
+            margin: 5px auto;
+            max-width: 500px;
+            background-color:   #fff;;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0, 0.1);
+        }
+        .URL-form{
+            height: 80px;
+            max-width: 400px;
+            margin: 10px auto;
+            border-radius: 9px;
+            background: #c86eeb;
+            
+        }
+        p{
+            margin-top: 30px;
+        }
+        label{
+            color: #fff;
+        }
+       
+
+        input,button{
+          padding: 10px;
+          border-radius: 8px;
+          border: none;
+        }
+        
+        table{
+            margin: 20px auto;
+           
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>URL Shortner</h1>
+   <div class="URL-form">
+    <form method="post" action="/url">
+        <label for="">Enter Your Orginal URL</label>
+        <input type="text" name="url" placeholder="http://exampale.com">
+        <button type="submit">Generate</button>
+        <% if (locals.id) { %>
+            <p><span>URL Generatade: <a href="/url/<%= id %>">Visit By Press</a></span></p>
+         <% } %>
+         <% if (!locals.urls) { %>
+            <p><span>Please Enter Valid URL</a></span></p>
+         <% } %>
+    </form>
+   
+     
+   </div>
+   <div class="table">
+    <% if (locals.urls) { %>
+      <table>
+        <thead>
+            <th>Sr.No</th>
+            <th>ShortID</th>
+            <th>Redirect</th>
+            <th>Clicks</th>
+        </thead>
+        <tbody>
+            <% urls.forEach((url,index)=> { %>
+                <tr>
+              <td><%= index + 1 %></td>
+              <td><a href="/url/<%= url.shortId %>"><%= url.shortId %></a></td>
+              <td><%= url.redirectURL %></td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+   </div>
+    </div>
+   
+</body>
+</html>
