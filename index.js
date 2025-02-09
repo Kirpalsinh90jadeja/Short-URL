@@ -10,7 +10,7 @@ const {restrictToLogedinUserOnly,checkAuth}= require("./middleware/auth")
 const URL = require("./models/user")
 
 const app = express();
-const PORT =process.env.PORT;
+const PORT =process.env.PORT || 8900;
 
 app.set("view engine","ejs");
 app.set("views", path.resolve("./views"));
