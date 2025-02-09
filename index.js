@@ -13,7 +13,7 @@ const app = express();
 const PORT =process.env.PORT || 8900;
 
 app.set("view engine","ejs");
-app.set("views", path.resolve("./views"));
+app.set("views", path.resolve("views"));
 
 const staticRoute= require("./routes/statics")
 const urlRoute = require("./routes/url")
