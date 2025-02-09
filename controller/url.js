@@ -13,7 +13,7 @@ await URL.create({
     redirectURL:body.url,
      
     visitHistory:[],
-    createdBy:req.user._id,
+    // createdBy:req.user._id,
 })
 return res.render('home',
     {id:shortID}

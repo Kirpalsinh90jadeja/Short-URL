@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
-
-const ownerSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
    name:{
     type:String,
     requred:true,
@@ -17,6 +17,12 @@ const ownerSchema = new mongoose.Schema({
    },
 },{timestamps:true});
 
-const Owner = mongoose.model('owner',ownerSchema);
+userSchema.methods.generateAuthToken = function(){
+   const token = jwt.sign({_id: this._id}, process.env.JWT_SECRET,{expiresIn:'24h'});
+   return token;  
+}
+
+
+const Owner = mongoose.model('owner',userSchema);
 
 module.exports =  Owner;

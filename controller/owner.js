@@ -12,11 +12,14 @@ async function handelUserSignup(req, res) {
     let error = "Email already exist";
     return res.render('signup',{error:error})
   }
-  await User.create({
+  const user= await User.create({
     name,
     email,
     password,
   });
+   
+  const token = user.generateAuthToken();
+  res.cookie("uid", token); 
   return res.render("home");
 }
 
@@ -30,8 +33,8 @@ async function handelUserLogin(req, res) {
       }
     
     
-       
-    const token = setUser( user); //call setUser function and pass key as sessionId and pass value as user
+    const token = user.generateAuthToken();
+    // const token = setUser( user); //call setUser function and pass key as sessionId and pass value as user
     res.cookie("uid", token); // name of cookie is a uid and pass sessinId to cookie
     return res.render("home");
   } catch (err) {

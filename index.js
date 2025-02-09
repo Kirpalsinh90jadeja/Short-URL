@@ -6,7 +6,7 @@ dotenv.config();
 
 const {connectToMongoDB} = require('./connect')
 const cookieParser = require("cookie-parser")
-const {restrictToLogedinUserOnly,checkAuth}= require("./middleware/auth")
+
 const URL = require("./models/user")
 
 const app = express();
@@ -26,9 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use("/",checkAuth,staticRoute);
+app.use("/",staticRoute);
 app.use("/user",userRoute);
-app.use("/" ,restrictToLogedinUserOnly ,urlRoute);
+app.use("/" ,urlRoute);
 
 app.use('/url/:shortId',async(req,res)=>{
 const shortId = req.params.shortId;
